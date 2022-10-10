@@ -11,5 +11,22 @@
  * @return {number[]}
  */
 var largestValues = function(root) {
+  if (!root) return []
+  const result = []
+  const queue = [root]
 
+  while (queue.length) {
+    let max = -Infinity
+    const len = queue.length
+
+    for (let i = 0; i < len; i++) {
+      const node = queue.shift()
+      max = Math.max(max, node.val)
+      node.left && queue.push(node.left)
+      node.right && queue.push(node.right)
+    }
+    result.push(max)
+  }
+
+  return result
 };
