@@ -14,6 +14,7 @@ function multiFetch(urls, max, callback) {
     request(urlsWithIndex.shift());
   }
 
+  // 处理请求正常情况/异常情况，以及补充新请求
   function request({ url, index }) {
     fetch(url).then(res => {
       result[index] = res;
