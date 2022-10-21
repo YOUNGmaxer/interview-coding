@@ -27,3 +27,21 @@ var rightSideView = function(root) {
 
   return result;
 };
+
+function rightSideView_2(root) {
+  const result = []
+
+  function dfs(node, depth) {
+    if (!node) return
+
+    if (result.length === depth) result.push(node.val)
+
+    depth++
+    dfs(node.right, depth)
+    dfs(node.left, depth)
+  }
+
+  dfs(root, 0)
+
+  return result
+}
