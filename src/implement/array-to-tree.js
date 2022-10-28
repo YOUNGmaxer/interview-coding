@@ -37,6 +37,39 @@ function arrayToTree(data) {
   return result;
 }
 
+function arrayToTree_2(data) {
+  const itemMap = new Map()
+  const result = []
+
+  for (const item of data) {
+    const { pid, id } = item
+
+    if (itemMap.has(id)) {
+      itemMap.get(id).pid = pid
+    } else {
+      itemMap.set(id, item)
+    }
+
+    if (pid === 0) {
+      result.push(item)
+      continue
+    }
+
+    if (itemMap.has(pid)) {
+      const pItem = itemMap.get(pid)
+      pItem.children = pItem.children || []
+      pItem.children.push(item)
+    } else {
+      itemMap.set(pid, {
+        id: pid,
+        children: [item]
+      })
+    }
+  }
+
+  return result
+}
+
 const data = [
   {id: 1, name: '部门1', pid: 0},
   {id: 2, name: '部门2', pid: 3},
@@ -48,4 +81,5 @@ const data = [
   {id: 8, name: '部门5', pid: 7},
 ];
 
-console.log(arrayToTree(data));
+// console.log(arrayToTree(data));
+console.log(arrayToTree_2(data));
