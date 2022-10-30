@@ -11,4 +11,9 @@ function curry(fn) {
   }
 }
 
+const sum = a => b => c => a + b + c
+const sum2 = (a, b, c) => a + b + c
 
+console.log(sum(1)(2)(3))
+
+console.log(curry(sum)(1)(2)(3))
