@@ -16,8 +16,8 @@ function apply(target, args) {
   return res
 }
 
-function bind(target, ...args) {
-  target = target || window
+Function.prototype.bind = function bind(target, ...args) {
+  target = target || globalThis
   const symbol = Symbol()
   target[symbol] = this
 
@@ -25,3 +25,17 @@ function bind(target, ...args) {
     return target[symbol](...args, ...innerArgs)
   }
 }
+
+const a = {
+  a: 1
+}
+
+const b = {
+  a: 2
+}
+
+function fn() {
+  console.log(this.a)
+}
+
+fn.bind(a).bind(b)()
